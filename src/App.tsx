@@ -1,11 +1,10 @@
 import React from 'react';
+import Movies from './components/Movies';
 
-function App() {
+export default function App() {
   return (
     <main className="container">
-      <h1>hello</h1>
+      <Movies />
     </main>
   );
 }
-
-export default App;

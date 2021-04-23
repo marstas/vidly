@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getMovies } from '../services/fakeMovieService';
+import Like from './Like';
 
 export default function Movies() {
   const [movies, setMovies] = useState(getMovies());
@@ -7,6 +8,12 @@ export default function Movies() {
   const handleDelete = (movieId: string) => {
     const indx = movies.findIndex((movie) => movie._id === movieId);
     movies.splice(indx, 1);
+    setMovies([...movies]);
+  };
+
+  const handleLike = (movieId: string) => {
+    const indx = movies.findIndex((movie) => movie._id === movieId);
+    movies[indx].isLike = !movies[indx].isLike;
     setMovies([...movies]);
   };
 
@@ -20,6 +27,7 @@ export default function Movies() {
           <th scope="col">Stock</th>
           <th scope="col">Rate</th>
           <th scope="col"></th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -29,6 +37,9 @@ export default function Movies() {
             <td>{movie.genre.name}</td>
             <td>{movie.numberInStock}</td>
             <td>{movie.dailyRentalRate}</td>
+            <td>
+              <Like onLike={handleLike} item={movie} />
+            </td>
             <td>
               <button
                 className="btn btn-danger"

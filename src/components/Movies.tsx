@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { getMovies } from '../services/fakeMovieService';
-import Like from './Like';
+import Like from './common/Like';
 
 export default function Movies() {
   const [movies, setMovies] = useState(getMovies());
@@ -13,7 +13,7 @@ export default function Movies() {
 
   const handleLike = (movieId: string) => {
     const indx = movies.findIndex((movie) => movie._id === movieId);
-    movies[indx].isLike = !movies[indx].isLike;
+    movies[indx].liked = !movies[indx].liked;
     setMovies([...movies]);
   };
 
@@ -38,7 +38,7 @@ export default function Movies() {
             <td>{movie.numberInStock}</td>
             <td>{movie.dailyRentalRate}</td>
             <td>
-              <Like onLike={handleLike} item={movie} />
+              <Like onLike={() => handleLike(movie._id)} liked={movie.liked} />
             </td>
             <td>
               <button

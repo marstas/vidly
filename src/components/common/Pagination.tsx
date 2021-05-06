@@ -1,16 +1,18 @@
 import React from 'react';
+import { PAGE_SIZE } from '../../constants';
 
 type PaginationProps = {
-  numPages: number;
+  itemsCount: number;
   activePage: number;
   onPageChange: (newPage: number) => void;
 };
 
 export default function Pagination({
-  numPages,
+  itemsCount,
   activePage,
   onPageChange
 }: PaginationProps) {
+  const numPages = Math.ceil(itemsCount / PAGE_SIZE);
   if (numPages < 2) return null;
 
   return (

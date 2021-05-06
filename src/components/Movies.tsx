@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { PAGE_SIZE } from '../constants';
 import { getMovies } from '../services/fakeMovieService';
 import { getOnePage } from '../utils';
 import Like from './common/Like';
@@ -29,7 +28,7 @@ export default function Movies() {
     }
   };
 
-  return activeMovies.length > 0 ? (
+  return allMovies.length > 0 ? (
     <>
       <table className="table caption-top">
         <caption>Showing {activeMovies.length} movies in the database.</caption>
@@ -69,7 +68,7 @@ export default function Movies() {
         </tbody>
       </table>
       <Pagination
-        numPages={Math.ceil(allMovies.length / PAGE_SIZE)}
+        itemsCount={allMovies.length}
         activePage={activePage}
         onPageChange={handlePageChange}
       />

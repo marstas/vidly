@@ -6,10 +6,10 @@ import Like from './common/Like';
 import ListGroup from './common/ListGroup';
 import Pagination from './common/Pagination';
 
-export interface Genre {
+type Genre = {
   _id: string;
   name: string;
-}
+};
 
 export default function Movies() {
   const allMovies = getMovies();
@@ -61,6 +61,8 @@ export default function Movies() {
         <ListGroup
           items={allGenres}
           activeItem={activeGenre}
+          nameProp="name"
+          idProp="_id"
           onItemChange={handleGenreChange}
         />
       </div>

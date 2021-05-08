@@ -44,9 +44,7 @@ export default function Movies() {
     if (newGenre === allGenres[0]) {
       newMovies = allMovies;
     } else {
-      newMovies = allMovies.filter(
-        (movie) => movie.genre.name === newGenre.name
-      );
+      newMovies = allMovies.filter((movie) => movie.genre._id === newGenre._id);
     }
 
     setActiveGenre(newGenre);

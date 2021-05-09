@@ -63,8 +63,8 @@ export default function Movies() {
       <div className="col-12 col-md-6 col-lg-9">
         <MoviesTable
           activeMovies={activeMovies}
-          handleDelete={handleDelete}
-          handleLike={handleLike}
+          onDelete={handleDelete}
+          onLike={handleLike}
         />
         <Pagination
           itemsCount={filteredMovies.length}

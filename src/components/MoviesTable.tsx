@@ -4,14 +4,14 @@ import Like from './common/Like';
 
 type MoviesTableProps = {
   activeMovies: Movie[];
-  handleLike: (movieId: string) => void;
-  handleDelete: (movieId: string) => void;
+  onLike: (movieId: string) => void;
+  onDelete: (movieId: string) => void;
 };
 
 export default function MoviesTable({
   activeMovies,
-  handleLike,
-  handleDelete
+  onLike,
+  onDelete
 }: MoviesTableProps) {
   return (
     <table className="table caption-top">
@@ -34,12 +34,12 @@ export default function MoviesTable({
             <td>{movie.numberInStock}</td>
             <td>{movie.dailyRentalRate}</td>
             <td>
-              <Like onLike={() => handleLike(movie._id)} liked={movie.liked} />
+              <Like onLike={() => onLike(movie._id)} liked={movie.liked} />
             </td>
             <td>
               <button
                 className="btn btn-danger"
-                onClick={() => handleDelete(movie._id)}
+                onClick={() => onDelete(movie._id)}
               >
                 Delete
               </button>

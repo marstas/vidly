@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Genre } from '../models';
+import { Genre, Movie } from '../models';
 import { getGenres } from '../services/fakeGenreService';
 import { getMovies } from '../services/fakeMovieService';
 import { getOnePage } from '../utils';
@@ -16,6 +16,7 @@ export default function Movies() {
   const [filteredMovies, setFilteredMovies] = useState(allMovies);
   const [activeGenre, setActiveGenre] = useState(allGenres[0]);
   const [activePage, setActivePage] = useState(1);
+  const [sortAsc, setSortAsc] = useState(true);
 
   const handleDelete = (movieId: string) => {
     const indx = filteredMovies.findIndex((movie) => movie._id === movieId);
@@ -49,6 +50,24 @@ export default function Movies() {
     setActiveMovies(getOnePage(newMovies, 1));
   };
 
+  const handleSort = (columnName: string) => {
+    setSortAsc(!sortAsc);
+
+    const newFilteredMovies = filteredMovies.sort((a, b) => {
+      const firstItem = (a[columnName as keyof Movie] ||
+        a.genre.name) as string;
+      const secondItem = (b[columnName as keyof Movie] ||
+        b.genre.name) as string;
+
+      if (firstItem < secondItem) return sortAsc ? -1 : 1;
+      else if (firstItem > secondItem) return sortAsc ? 1 : -1;
+      else return 0;
+    });
+
+    setFilteredMovies([...newFilteredMovies]);
+    setActiveMovies(getOnePage(filteredMovies, activePage));
+  };
+
   return allMovies.length > 0 ? (
     <div className="row">
       <div className="col-12 col-md-6 col-lg-3 mt-3">
@@ -65,6 +84,7 @@ export default function Movies() {
           activeMovies={activeMovies}
           onDelete={handleDelete}
           onLike={handleLike}
+          onSort={handleSort}
         />
         <Pagination
           itemsCount={filteredMovies.length}

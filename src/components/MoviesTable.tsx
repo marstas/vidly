@@ -1,6 +1,7 @@
 import React from 'react';
 import { Movie } from '../models';
 import Like from './common/Like';
+import TableHeader from './common/TableHeader';
 
 type MoviesTableProps = {
   activeMovies: Movie[];
@@ -15,27 +16,17 @@ export default function MoviesTable({
   onDelete,
   onSort
 }: MoviesTableProps) {
+  const columns = [
+    { path: 'title', label: 'Title' },
+    { path: 'genre.name', label: 'Genre' },
+    { path: 'numberInStock', label: 'Stock' },
+    { path: 'dailyRentalRate', label: 'Rate' }
+  ];
+
   return (
     <table className="table caption-top">
       <caption>Showing {activeMovies.length} movies in the database.</caption>
-      <thead>
-        <tr>
-          <th onClick={() => onSort('title')} scope="col">
-            Title
-          </th>
-          <th onClick={() => onSort('genre.name')} scope="col">
-            Genre
-          </th>
-          <th onClick={() => onSort('numberInStock')} scope="col">
-            Stock
-          </th>
-          <th onClick={() => onSort('dailyRentalRate')} scope="col">
-            Rate
-          </th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
+      <TableHeader columns={columns} onSort={onSort} />
       <tbody>
         {activeMovies.map((movie) => (
           <tr key={movie._id}>

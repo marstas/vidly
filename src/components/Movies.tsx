@@ -18,14 +18,14 @@ export default function Movies() {
   const [activePage, setActivePage] = useState(1);
   const [sortAsc, setSortAsc] = useState(true);
 
-  const handleDelete = (movieId: string) => {
-    const indx = filteredMovies.findIndex((movie) => movie._id === movieId);
+  const handleDelete = (itemId: string) => {
+    const indx = filteredMovies.findIndex((movie) => movie._id === itemId);
     filteredMovies.splice(indx, 1);
     setActiveMovies(getOnePage([...filteredMovies], activePage));
   };
 
-  const handleLike = (movieId: string) => {
-    const indx = activeMovies.findIndex((movie) => movie._id === movieId);
+  const handleLike = (itemId: string) => {
+    const indx = activeMovies.findIndex((movie) => movie._id === itemId);
     activeMovies[indx].liked = !activeMovies[indx].liked;
     setActiveMovies([...activeMovies]);
   };

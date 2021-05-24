@@ -2,9 +2,11 @@ import React from 'react';
 import { Movie } from '../models';
 import TableBody from './common/TableBody';
 import TableHeader from './common/TableHeader';
+import { SortColumn } from './Movies';
 
 type MoviesTableProps = {
   activeMovies: Movie[];
+  sortColumn: SortColumn;
   onLike: (itemId: string) => void;
   onDelete: (itemId: string) => void;
   onSort: (columnName: string) => void;
@@ -12,6 +14,7 @@ type MoviesTableProps = {
 
 export default function MoviesTable({
   activeMovies,
+  sortColumn,
   onLike,
   onDelete,
   onSort
@@ -26,7 +29,7 @@ export default function MoviesTable({
   return (
     <table className="table caption-top">
       <caption>Showing {activeMovies.length} movies in the database.</caption>
-      <TableHeader columns={columns} onSort={onSort} />
+      <TableHeader sortColumn={sortColumn} columns={columns} onSort={onSort} />
       <TableBody
         data={activeMovies}
         columns={columns}

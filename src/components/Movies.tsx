@@ -7,6 +7,11 @@ import ListGroup from './common/ListGroup';
 import Pagination from './common/Pagination';
 import MoviesTable from './MoviesTable';
 
+export type SortColumn = {
+  columnName: string;
+  sortOrder: string;
+};
+
 export default function Movies() {
   const allMovies = getMovies();
   const allGenres = getGenres();
@@ -16,7 +21,10 @@ export default function Movies() {
   const [filteredMovies, setFilteredMovies] = useState(allMovies);
   const [activeGenre, setActiveGenre] = useState(allGenres[0]);
   const [activePage, setActivePage] = useState(1);
-  const [sortAsc, setSortAsc] = useState(true);
+  const [sortColumn, setSortColumn] = useState<SortColumn>({
+    columnName: 'title',
+    sortOrder: 'asc'
+  });
 
   const handleDelete = (itemId: string) => {
     const indx = filteredMovies.findIndex((movie) => movie._id === itemId);
@@ -51,7 +59,12 @@ export default function Movies() {
   };
 
   const handleSort = (columnName: string) => {
-    setSortAsc(!sortAsc);
+    setSortColumn({
+      columnName,
+      sortOrder: sortColumn.sortOrder === 'asc' ? 'desc' : 'asc'
+    });
+
+    const isAscending = sortColumn.sortOrder === 'asc';
 
     const newFilteredMovies = filteredMovies.sort((a, b) => {
       const firstItem = (a[columnName as keyof Movie] ||
@@ -59,8 +72,8 @@ export default function Movies() {
       const secondItem = (b[columnName as keyof Movie] ||
         b.genre.name) as string;
 
-      if (firstItem < secondItem) return sortAsc ? -1 : 1;
-      else if (firstItem > secondItem) return sortAsc ? 1 : -1;
+      if (firstItem < secondItem) return isAscending ? -1 : 1;
+      else if (firstItem > secondItem) return isAscending ? 1 : -1;
       else return 0;
     });
 
@@ -82,6 +95,7 @@ export default function Movies() {
       <div className="col-12 col-md-6 col-lg-9">
         <MoviesTable
           activeMovies={activeMovies}
+          sortColumn={sortColumn}
           onDelete={handleDelete}
           onLike={handleLike}
           onSort={handleSort}

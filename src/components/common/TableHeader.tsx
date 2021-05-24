@@ -1,10 +1,12 @@
 import React from 'react';
 
+export type Column = {
+  path: string;
+  label: string;
+};
+
 type TableHeaderProps = {
-  columns: {
-    path: string;
-    label: string;
-  }[];
+  columns: Column[];
   onSort: (columnName: string) => void;
 };
 

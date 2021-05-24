@@ -1,11 +1,7 @@
 import React from 'react';
 import _ from 'lodash';
 import Like from './Like';
-
-type Column = {
-  path: string;
-  label: string;
-};
+import { Column } from './TableHeader';
 
 type TableBodyProps<T> = {
   data: T[];

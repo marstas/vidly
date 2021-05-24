@@ -1,7 +1,6 @@
 import React from 'react';
 import { Movie } from '../models';
-import TableBody from './common/TableBody';
-import TableHeader from './common/TableHeader';
+import Table from './common/Table';
 import { SortColumn } from './Movies';
 
 type MoviesTableProps = {
@@ -27,15 +26,13 @@ export default function MoviesTable({
   ];
 
   return (
-    <table className="table caption-top">
-      <caption>Showing {activeMovies.length} movies in the database.</caption>
-      <TableHeader sortColumn={sortColumn} columns={columns} onSort={onSort} />
-      <TableBody
-        data={activeMovies}
-        columns={columns}
-        onLike={onLike}
-        onDelete={onDelete}
-      />
-    </table>
+    <Table
+      data={activeMovies}
+      columns={columns}
+      sortColumn={sortColumn}
+      onLike={onLike}
+      onDelete={onDelete}
+      onSort={onSort}
+    />
   );
 }

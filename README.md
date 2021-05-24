@@ -1,6 +1,6 @@
 # Vidly
 
-React / Typescript practice application, based on [Code with Mosh - Mastering React](https://codewithmosh.com/p/mastering-react) course.
+React / Typescript practice application, built while completing [Code with Mosh - Mastering React](https://codewithmosh.com/p/mastering-react) course.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

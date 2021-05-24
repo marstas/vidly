@@ -93,6 +93,7 @@ export default function Movies() {
         />
       </div>
       <div className="col-12 col-md-6 col-lg-9">
+        <p>Showing {activeMovies.length} movies in the database.</p>
         <MoviesTable
           activeMovies={activeMovies}
           sortColumn={sortColumn}

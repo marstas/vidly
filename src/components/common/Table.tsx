@@ -22,7 +22,6 @@ export default function Table<T>({
 }: TableProps<T>) {
   return (
     <table className="table caption-top">
-      <caption>Showing {data.length} items in the database.</caption>
       <TableHeader sortColumn={sortColumn} columns={columns} onSort={onSort} />
       <TableBody
         data={data}

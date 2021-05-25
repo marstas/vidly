@@ -1,4 +1,4 @@
-# Vidly
+# Vidly (in progress)
 
 React / Typescript practice application, built while completing [Code with Mosh - Mastering React](https://codewithmosh.com/p/mastering-react) course.
 
